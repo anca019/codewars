@@ -1,30 +1,13 @@
 def iq_test(numbers)
-  #your code here
-  odd_arr=[]
-  even_arr=[]
-  position=0
-  array_num = numbers.split(' ')
-  array_num.each do |num|
-    if num.to_i.even? 
-      even_arr << num
+  arr = numbers.split(' ').map{|e| e.to_i}
+  evenCount = arr.select {|e| e.even?}.count
+  oddCount = arr.select {|e| e.odd?}.count
+
+  arr.each_with_index do |e,i|
+    if evenCount > oddCount
+      return i + 1 if e.odd?
     else
-      odd_arr << num
+      return i + 1 if e.even?
     end
- end
- if odd_arr.length == 1
-   array_num.each_with_index do |num, index|
-     if odd_arr[0].to_i == num.to_i
-       position += index
-     end
-   end
- elsif even_arr.length == 1
-   array_num.each_with_index do |num, index|
-     if odd_arr[0].to_i == num.to_i
-       position += index
-     end
-   end
- end 
-  
- return position += 1
-  
+  end
 end
